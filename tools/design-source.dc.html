@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AS Forge Nexus Cinematic</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif}
+a{text-decoration:none;color:inherit}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+.hd{font-family:'Chakra Petch',sans-serif}
+@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+@keyframes spinr{0%{transform:rotate(360deg)}100%{transform:rotate(0deg)}}
+@keyframes grad{0%{background-position:0% 50%}100%{background-position:300% 50%}}
+@keyframes rise{0%{opacity:0;transform:translateY(26px)}100%{opacity:1;transform:none}}
+@keyframes flow{0%{stroke-dashoffset:0}100%{stroke-dashoffset:-48}}
+@keyframes grow{0%{transform:scaleY(0)}100%{transform:scaleY(1)}}
+@keyframes sweep{0%{transform:translateX(-120%)}100%{transform:translateX(320%)}}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+@keyframes core{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.12);opacity:1}}
+@keyframes sway{0%{transform:rotateX(60deg) rotateZ(-36deg)}100%{transform:rotateX(46deg) rotateZ(-16deg)}}
+@keyframes logscroll{0%{transform:translateY(0)}100%{transform:translateY(-50%)}}
+@keyframes hover3d{0%,100%{transform:translateZ(230px)}50%{transform:translateZ(290px)}}
+@keyframes hover3db{0%,100%{transform:translateZ(150px)}50%{transform:translateZ(210px)}}
+@keyframes tunnel{0%{transform:translate(-50%,-50%) scale(.2);opacity:0}15%{opacity:1}100%{transform:translate(-50%,-50%) scale(2.6);opacity:0}}
+@keyframes orbit{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+@keyframes counter{0%{transform:rotate(0deg)}100%{transform:rotate(-360deg)}}
+@keyframes in3d{0%{opacity:0;transform:perspective(1300px) translateY(150px) translateZ(-320px) rotateX(26deg) scale(.94)}100%{opacity:1;transform:none}}
+@keyframes out3d{0%{opacity:1;transform:none}100%{opacity:.1;transform:perspective(1300px) translateY(-130px) translateZ(-280px) rotateX(-22deg) scale(.94)}}
+@keyframes flipL{0%{opacity:0;transform:perspective(1000px) translateX(-90px) translateZ(-200px) rotateY(-50deg)}100%{opacity:1;transform:none}}
+@keyframes flipR{0%{opacity:0;transform:perspective(1000px) translateX(90px) translateZ(-200px) rotateY(50deg)}100%{opacity:1;transform:none}}
+@keyframes flipU{0%{opacity:0;transform:perspective(1000px) translateY(110px) translateZ(-220px) rotateX(38deg)}100%{opacity:1;transform:none}}
+@keyframes ambient{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
+@keyframes progress{0%{transform:scaleX(0)}100%{transform:scaleX(1)}}
+@keyframes nebhue{0%{filter:hue-rotate(0deg)}100%{filter:hue-rotate(300deg)}}
+@keyframes nodep{0%,100%{r:5;opacity:.6}50%{r:8;opacity:1}}
+@keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.spin{animation:spin 30s linear infinite}
+.spin2{animation:spinr 22s linear infinite}
+.spin3{animation:spin 14s linear infinite}
+.spin4{animation:spinr 40s linear infinite}
+.orb{animation:orbit 26s linear infinite}
+.orb2{animation:orbit 38s linear infinite reverse}
+.cnt{animation:counter 26s linear infinite}
+.cnt2{animation:counter 38s linear infinite reverse}
+.coreo{animation:core 4s ease-in-out infinite;transform-origin:240px 240px}
+.g{background-size:300% auto;animation:grad 8s linear infinite}
+.r1{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
+.r2{animation:rise .9s .15s cubic-bezier(.2,.7,.2,1) both}
+.r3{animation:rise .9s .3s cubic-bezier(.2,.7,.2,1) both}
+.flow{stroke-dasharray:10 14;animation:flow 1.2s linear infinite}
+.flow2{stroke-dasharray:3 9;animation:flow 2.4s linear infinite}
+.bar{transform-origin:bottom;animation:grow 1.2s cubic-bezier(.2,.8,.2,1) both}
+.sw{animation:sweep 3.4s ease-in-out infinite}
+.pl{animation:pulse 2.4s ease-in-out infinite}
+.dr{animation:drift 7s ease-in-out infinite}
+.stage{perspective:1500px;display:flex;align-items:center;justify-content:center;height:560px}
+.rig{position:relative;width:min(520px,68vw);height:330px;transform-style:preserve-3d;animation:sway 11s ease-in-out infinite alternate}
+.plate{position:absolute;box-sizing:border-box;border-radius:14px}
+.logs{animation:logscroll 14s linear infinite}
+.hv1{animation:hover3d 5s ease-in-out infinite}
+.hv2{animation:hover3db 6s -2s ease-in-out infinite}
+.tun{position:absolute;left:50%;top:50%;width:520px;height:300px;border:1.5px solid rgba(0,229,255,.6);border-radius:24px;animation:tunnel 7s linear infinite}
+.node{animation:nodep 3s ease-in-out infinite}
+.panel{position:relative;overflow:hidden;transition:transform .55s cubic-bezier(.2,.7,.2,1),filter .7s ease,border-color .5s ease,box-shadow .5s ease}
+.panel:hover{transform:perspective(900px) translateY(-10px) rotateX(5deg) rotateY(-6deg);filter:hue-rotate(75deg) saturate(1.25);border-color:rgba(255,255,255,.55);box-shadow:0 34px 80px rgba(0,0,0,.5)}
+.b3d{position:relative;display:inline-block;transform-style:preserve-3d;transition:transform .35s cubic-bezier(.2,.7,.2,1),filter .6s ease,box-shadow .35s ease;box-shadow:0 7px 0 var(--sh,#0a5f73),0 18px 34px rgba(0,229,255,.28)}
+.b3d:hover{transform:perspective(700px) rotateX(16deg) translateY(-4px);filter:hue-rotate(80deg) saturate(1.2);box-shadow:0 11px 0 var(--sh,#0a5f73),0 26px 46px rgba(0,229,255,.4)}
+.b3d:active{transform:perspective(700px) rotateX(6deg) translateY(5px);box-shadow:0 2px 0 var(--sh,#0a5f73),0 6px 16px rgba(0,229,255,.3)}
+.ghost{transition:transform .35s cubic-bezier(.2,.7,.2,1),background .4s ease,border-color .4s ease,color .4s ease}
+.ghost:hover{transform:perspective(700px) rotateX(14deg) translateY(-4px);background:rgba(255,255,255,.12);border-color:#fff}
+.amb{position:absolute;left:0;right:0;top:-12%;bottom:-12%;pointer-events:none;opacity:.75}
+.top{position:fixed;left:0;top:0;height:3px;width:100%;z-index:20;transform-origin:left;background:linear-gradient(90deg,#00E5FF,#7B61FF,#FF3DCB,#FF8A3D,#FFC53D);transform:scaleX(0)}
+.nebula{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(900px 600px at 85% 15%,rgba(123,97,255,.38),transparent 70%),radial-gradient(800px 600px at 8% 55%,rgba(0,229,255,.28),transparent 70%),radial-gradient(800px 500px at 60% 95%,rgba(255,106,31,.22),transparent 70%)}
+.grain{position:absolute;inset:0;z-index:4;pointer-events:none;mix-blend-mode:overlay;opacity:.32;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.9'/%3E%3C/svg%3E")}
+@keyframes streak{0%{transform:translateX(-30%);opacity:0}30%{opacity:1}100%{transform:translateX(30%);opacity:0}}
+.streak{position:absolute;left:0;right:0;top:740px;height:3px;z-index:1;pointer-events:none;background:linear-gradient(90deg,transparent,#19E8FF 30%,#fff 50%,#FF6A1F 70%,transparent);filter:blur(1px);box-shadow:0 0 40px 8px rgba(25,232,255,.35),0 0 90px 20px rgba(255,106,31,.2);animation:streak 6s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){.streak{animation:none;opacity:.6}}
+.hex{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'%3E%3Cpath d='M28 0l28 16v32L28 64 0 48V16zM28 64l28 16v17M28 64L0 80v17' fill='none' stroke='%23ffffff' stroke-opacity='.07'/%3E%3C/svg%3E")}
+a:focus-visible{outline:2px solid #00E5FF;outline-offset:3px}
+@supports (animation-timeline:view()){
+.in3d{animation:in3d linear backwards,out3d linear forwards;animation-timeline:view(),view();animation-range:entry 0% entry 70%,exit 35% exit 100%}
+.fl{animation:flipL linear backwards;animation-timeline:view();animation-range:entry 0% entry 70%}
+.fr{animation:flipR linear backwards;animation-timeline:view();animation-range:entry 0% entry 70%}
+.fu1{animation:flipU linear backwards;animation-timeline:view();animation-range:entry 0% entry 62%}
+.fu2{animation:flipU linear backwards;animation-timeline:view();animation-range:entry 8% entry 74%}
+.fu3{animation:flipU linear backwards;animation-timeline:view();animation-range:entry 16% entry 86%}
+.amb{animation:ambient linear both;animation-timeline:view();animation-range:cover 0% cover 100%}
+.top{animation:progress linear both;animation-timeline:scroll(root)}
+.nebula{animation:nebhue linear both;animation-timeline:scroll(root)}
+}
+@media (prefers-reduced-motion:reduce){.spin,.spin2,.spin3,.spin4,.orb,.orb2,.cnt,.cnt2,.coreo,.g,.r1,.r2,.r3,.flow,.flow2,.bar,.sw,.pl,.dr,.rig,.logs,.hv1,.hv2,.tun,.node{animation:none}.in3d,.fl,.fr,.fu1,.fu2,.fu3,.amb,.top,.nebula{animation:none !important}.panel,.b3d,.ghost{transition:none}}
+@media (max-width:760px){.stage{height:430px}.rig{height:260px}}
+</style>
+</helmet>
+<div style="background:#02030A;color:#E6F0FF;min-height:8500px;position:relative;overflow:hidden;display:flex;flex-direction:column;box-sizing:border-box">
+
+<div class="top"></div>
+<div class="nebula"></div>
+<div class="hex" style="position:absolute;inset:0;pointer-events:none"></div>
+<div class="streak"></div>
+<div class="grain"></div>
+
+<header style="position:relative;z-index:5;display:flex;justify-content:center;padding:22px clamp(16px,4vw,40px) 0">
+<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 28px;width:100%;max-width:1180px;box-sizing:border-box;padding:10px 12px 10px 20px;border-radius:16px;background:rgba(8,14,32,.72);border:1px solid rgba(120,180,255,.22);backdrop-filter:blur(14px)">
+<div class="hd" style="display:flex;align-items:center;gap:10px;font-weight:700;font-size:20px;letter-spacing:.02em">
+<svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2l12 7v14l-12 7L4 23V9z" fill="none" stroke="#00E5FF" stroke-width="2"/><path d="M16 9l6 3.5v7L16 23l-6-3.5v-7z" fill="#7B61FF"/></svg>AS Forge
+</div>
+<nav style="display:flex;flex-wrap:wrap;align-items:center;gap:24px;font-size:14px;color:#A9BBDD">
+<a href="#about">About us</a><a href="#lab">Projects</a><a href="#mech">How it works</a><a href="#specs">Features</a><a href="#plans">Free and Pro</a>
+<a class="b3d" href="#download" style="background:linear-gradient(135deg,#FFC53D,#FF5A1F);--sh:#9a3a0a;color:#04120A;font-weight:700;padding:10px 20px;border-radius:10px">Download</a>
+</nav>
+</div>
+</header>
+
+<section style="position:relative;z-index:2;display:flex;flex-wrap:wrap;align-items:center;gap:40px 56px;padding:90px clamp(20px,5vw,72px) 160px;max-width:1280px;margin:0 auto;width:100%;box-sizing:border-box">
+<div style="flex:1 1 480px;min-width:0">
+<span class="r1 mono" style="display:inline-flex;align-items:center;gap:10px;font-size:12.5px;letter-spacing:.1em;padding:8px 14px;border-radius:8px;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.35);color:#7DEBFF"><span class="pl" style="width:8px;height:8px;border-radius:50%;background:#FFC53D;display:inline-block"></span>AS FORGE · SOFTWARE LAB</span>
+<h1 class="r2 hd" style="margin:28px 0 24px;font-weight:700;font-size:clamp(42px,6vw,88px);line-height:1.02;text-wrap:balance">Software from <span class="g" style="background-image:linear-gradient(90deg,#00E5FF,#7B61FF,#FF3DCB,#FF8A3D,#FFC53D,#00E5FF);-webkit-background-clip:text;background-clip:text;color:transparent">the future.</span></h1>
+<p class="r3" style="margin:0 0 14px;max-width:560px;font-size:clamp(17px,1.8vw,21px);line-height:1.65;color:#C5D2EC">We build fast, secure desktop software. Our first product, <b style="color:#fff">AS Fetchly</b>, downloads YouTube and TikTok videos, playlists and whole profiles, up to 4K.</p>
+<p class="r3 mono" style="margin:0 0 36px;font-size:13px;color:#7DEBFF">FREE TO START · WINDOWS 10 / 11 · ENGLISH AND URDU</p>
+<div class="r3" style="display:flex;flex-wrap:wrap;gap:20px">
+<a class="b3d" href="#download" style="background:linear-gradient(135deg,#FFC53D,#FF5A1F);--sh:#9a3a0a;color:#04120A;font-weight:700;font-size:17px;padding:18px 34px;border-radius:14px">Download AS Fetchly</a>
+<a class="ghost" href="#about" style="border:1.5px solid rgba(160,200,255,.5);color:#E6F0FF;font-weight:600;font-size:17px;padding:16.5px 32px;border-radius:14px">About AS Forge</a>
+</div>
+</div>
+
+<div style="flex:1 1 400px;min-width:0;display:flex;align-items:center;justify-content:center;position:relative;height:500px">
+<svg viewBox="0 0 480 480" style="position:absolute;width:min(480px,100%);height:auto" aria-hidden="true">
+<defs>
+<radialGradient id="orbg"><stop offset="0" stop-color="#fff"/><stop offset=".25" stop-color="#7DEBFF"/><stop offset=".6" stop-color="#7B61FF"/><stop offset="1" stop-color="#7B61FF" stop-opacity="0"/></radialGradient>
+</defs>
+<g class="spin4" style="transform-origin:240px 240px"><circle cx="240" cy="240" r="226" fill="none" stroke="#00E5FF" stroke-opacity=".55" stroke-width="10" stroke-dasharray="1.5 11.5"/></g>
+<g class="spin" style="transform-origin:240px 240px"><circle cx="240" cy="240" r="196" fill="none" stroke="#7B61FF" stroke-opacity=".8" stroke-width="3" stroke-dasharray="90 40 20 40"/></g>
+<g class="spin2" style="transform-origin:240px 240px"><circle cx="240" cy="240" r="160" fill="none" stroke="#FF3DCB" stroke-opacity=".7" stroke-width="2" stroke-dasharray="4 8"/><circle cx="240" cy="80" r="7" fill="#FF3DCB"/></g>
+<g class="spin3" style="transform-origin:240px 240px"><circle cx="240" cy="240" r="124" fill="none" stroke="#FFC53D" stroke-opacity=".7" stroke-width="2.5" stroke-dasharray="40 24"/></g>
+<circle cx="240" cy="240" r="92" fill="none" stroke="#00E5FF" stroke-opacity=".5" stroke-width="1.5"/>
+<g class="coreo"><circle cx="240" cy="240" r="84" fill="url(#orbg)"/></g>
+<path d="M240 200l35 20v40l-35 20-35-20v-40z" fill="rgba(3,5,13,.55)" stroke="#fff" stroke-width="2.5"/>
+<text x="240" y="251" text-anchor="middle" font-family="Chakra Petch,sans-serif" font-weight="700" font-size="30" fill="#fff">AS</text>
+</svg>
+<div class="orb" style="position:absolute;width:min(392px,82%);aspect-ratio:1">
+<span class="cnt mono" style="position:absolute;left:50%;top:-14px;margin-left:-34px;padding:6px 12px;border-radius:8px;background:rgba(0,229,255,.16);border:1px solid #00E5FF;color:#7DEBFF;font-size:12.5px">YouTube</span>
+<span class="cnt mono" style="position:absolute;right:-26px;top:50%;margin-top:-16px;padding:6px 12px;border-radius:8px;background:rgba(255,61,203,.16);border:1px solid #FF3DCB;color:#FF9BE4;font-size:12.5px">TikTok</span>
+<span class="cnt mono" style="position:absolute;left:50%;bottom:-14px;margin-left:-14px;padding:6px 12px;border-radius:8px;background:rgba(255,197,61,.16);border:1px solid #FFC53D;color:#FFE08A;font-size:12.5px">4K</span>
+<span class="cnt mono" style="position:absolute;left:-26px;top:50%;margin-top:-16px;padding:6px 12px;border-radius:8px;background:rgba(255,138,61,.16);border:1px solid #FF8A3D;color:#FFB27D;font-size:12.5px">MP3</span>
+</div>
+</div>
+</section>
+
+<section id="download" style="position:relative;z-index:2;padding:40px clamp(20px,5vw,72px) 150px;max-width:1280px;margin:0 auto;width:100%;box-sizing:border-box">
+<div class="amb" style="background:radial-gradient(800px 380px at 50% 50%,rgba(255,197,61,.22),transparent 70%)"></div>
+<div class="in3d panel" style="position:relative;border-radius:30px;border:1.5px solid rgba(255,197,61,.55);background:linear-gradient(135deg,rgba(34,20,8,.92),rgba(5,10,26,.92));padding:clamp(32px,5vw,64px);box-shadow:0 0 90px rgba(255,197,61,.16)">
+<div style="position:absolute;top:0;left:0;width:30%;height:2px;background:linear-gradient(90deg,transparent,#FFC53D,transparent)" class="sw"></div>
+<div style="display:flex;flex-wrap:wrap;gap:44px;align-items:center">
+<div style="flex:1.2 1 380px;min-width:0">
+<div class="mono" style="font-size:13px;letter-spacing:.12em;color:#FFC53D;margin-bottom:14px">// DOWNLOAD</div>
+<h2 class="hd" style="margin:0 0 14px;font-weight:700;font-size:clamp(30px,4.4vw,54px);line-height:1.05">Get AS Fetchly for Windows.</h2>
+<p style="margin:0 0 26px;font-size:17px;line-height:1.65;color:#C5D2EC">Version 0.8.0 · Windows 10 and 11 · about 215 MB. One file, installs itself, and removes the old version for you.</p>
+<div style="display:flex;flex-wrap:wrap;gap:20px;margin-bottom:22px">
+<a class="b3d" href="#download" style="background:linear-gradient(135deg,#FFC53D,#FF5A1F);--sh:#9a3a0a;color:#04120A;font-weight:700;font-size:18px;padding:18px 36px;border-radius:14px">Download for Windows</a>
+<a class="ghost" href="https://wa.me/923211478590" style="border:1.5px solid rgba(255,197,61,.6);color:#E6F0FF;font-weight:600;font-size:17px;padding:16.5px 30px;border-radius:14px">Buy Pro on WhatsApp</a>
+</div>
+<p class="mono" style="margin:0;font-size:12.5px;line-height:1.7;color:#8CA0C6">First run: if Windows shows "protected your PC", click More info, then Run anyway.</p>
+</div>
+<div style="flex:1 1 300px;min-width:0;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;align-items:center;gap:18px;padding:18px 20px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12)"><span class="mono" style="width:40px;height:40px;border-radius:50%;border:2px solid #00E5FF;color:#7DEBFF;display:flex;align-items:center;justify-content:center;font-size:15px;flex:none">01</span><div><div style="font-weight:600">Download</div><div style="font-size:14px;color:#A9BBDD">One setup file</div></div></div>
+<div style="display:flex;align-items:center;gap:18px;padding:18px 20px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12)"><span class="mono" style="width:40px;height:40px;border-radius:50%;border:2px solid #FF3DCB;color:#FF9BE4;display:flex;align-items:center;justify-content:center;font-size:15px;flex:none">02</span><div><div style="font-weight:600">Install</div><div style="font-size:14px;color:#A9BBDD">Double-click and wait a moment</div></div></div>
+<div style="display:flex;align-items:center;gap:18px;padding:18px 20px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12)"><span class="mono" style="width:40px;height:40px;border-radius:50%;border:2px solid #FFC53D;color:#FFE08A;display:flex;align-items:center;justify-content:center;font-size:15px;flex:none">03</span><div><div style="font-weight:600">Go Pro (optional)</div><div style="font-size:14px;color:#A9BBDD">Enter your licence key</div></div></div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="about" style="position:relative;z-index:2;padding:150px clamp(20px,5vw,72px);max-width:1280px;margin:0 auto;width:100%;box-sizing:border-box">
+<div class="amb" style="background:radial-gradient(800px 420px at 20% 40%,rgba(255,138,61,.28),transparent 70%),radial-gradient(700px 380px at 85% 70%,rgba(255,61,203,.18),transparent 70%)"></div>
+<div style="position:relative;display:flex;flex-wrap:wrap;gap:60px;align-items:center">
+<div class="fl" style="flex:1 1 420px;min-width:0">
+<div class="mono" style="font-size:13px;letter-spacing:.12em;color:#FF8A3D;margin-bottom:16px">// ABOUT US</div>
+<h2 class="hd" style="margin:0 0 20px;font-weight:700;font-size:clamp(32px,4.8vw,60px);line-height:1.05;text-wrap:balance">We forge tools people rely on.</h2>
+<p style="margin:0 0 18px;font-size:18px;line-height:1.75;color:#C5D2EC">AS Forge is a software company. We take a real, everyday problem, build a fast and secure solution for it, and stand behind every customer personally.</p>
+<p style="margin:0 0 30px;font-size:18px;line-height:1.75;color:#C5D2EC">One careful product at a time, each built to the same standard: quick to install, simple to use, and safe to trust.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px">
+<div class="panel" style="border:1px solid rgba(255,138,61,.5);border-radius:16px;padding:20px;background:rgba(255,138,61,.07)"><div class="hd" style="font-weight:700;font-size:20px;color:#FFB27D;margin-bottom:6px">Fast</div><div style="font-size:14px;line-height:1.55;color:#C5D2EC">Light apps and quick pages.</div></div>
+<div class="panel" style="border:1px solid rgba(255,61,203,.5);border-radius:16px;padding:20px;background:rgba(255,61,203,.07)"><div class="hd" style="font-weight:700;font-size:20px;color:#FF9BE4;margin-bottom:6px">Secure</div><div style="font-size:14px;line-height:1.55;color:#C5D2EC">Signed licences, your data stays yours.</div></div>
+<div class="panel" style="border:1px solid rgba(0,229,255,.5);border-radius:16px;padding:20px;background:rgba(0,229,255,.07)"><div class="hd" style="font-weight:700;font-size:20px;color:#7DEBFF;margin-bottom:6px">Personal</div><div style="font-size:14px;line-height:1.55;color:#C5D2EC">Real support from the makers.</div></div>
+</div>
+</div>
+<div class="fr" style="flex:1 1 420px;min-width:0">
+<div class="panel" style="border-radius:26px;border:1px solid rgba(255,138,61,.35);background:rgba(10,12,28,.82);padding:28px 24px 22px;box-shadow:0 40px 90px rgba(0,0,0,.5),0 0 80px rgba(255,138,61,.14)">
+<div class="mono" style="font-size:12px;letter-spacing:.1em;color:#FFB27D;margin-bottom:6px">SYSTEMS THINKING</div>
+<svg viewBox="0 0 540 420" style="display:block;width:100%;height:auto" aria-hidden="true">
+<path class="flow2" d="M60 110L200 60M60 110L200 140M60 110L200 220M60 110L200 300M60 110L200 360M60 200L200 60M60 200L200 140M60 200L200 220M60 200L200 300M60 200L200 360M60 290L200 60M60 290L200 140M60 290L200 220M60 290L200 300M60 290L200 360M200 60L340 100M200 60L340 190M200 60L340 280M200 60L340 350M200 140L340 100M200 140L340 190M200 140L340 280M200 140L340 350M200 220L340 100M200 220L340 190M200 220L340 280M200 220L340 350M200 300L340 100M200 300L340 190M200 300L340 280M200 300L340 350M200 360L340 100M200 360L340 190M200 360L340 280M200 360L340 350M340 100L480 150M340 100L480 260M340 190L480 150M340 190L480 260M340 280L480 150M340 280L480 260M340 350L480 150M340 350L480 260" stroke="#FF8A3D" stroke-opacity=".5" stroke-width="1.3" fill="none"/>
+<g fill="#FFB27D">
+<circle class="node" cx="60" cy="110" r="6"/><circle class="node" style="animation-delay:-.4s" cx="60" cy="200" r="6"/><circle class="node" style="animation-delay:-.8s" cx="60" cy="290" r="6"/>
+<circle class="node" style="animation-delay:-1.2s" cx="200" cy="60" r="6"/><circle class="node" style="animation-delay:-1.6s" cx="200" cy="140" r="6"/><circle class="node" style="animation-delay:-2s" cx="200" cy="220" r="6"/><circle class="node" style="animation-delay:-2.4s" cx="200" cy="300" r="6"/><circle class="node" style="animation-delay:-.2s" cx="200" cy="360" r="6"/>
+<circle class="node" style="animation-delay:-.6s" cx="340" cy="100" r="6"/><circle class="node" style="animation-delay:-1s" cx="340" cy="190" r="6"/><circle class="node" style="animation-delay:-1.4s" cx="340" cy="280" r="6"/><circle class="node" style="animation-delay:-1.8s" cx="340" cy="350" r="6"/>
+</g>
+<g fill="#FF3DCB"><circle class="node" style="animation-delay:-.3s" cx="480" cy="150" r="9"/><circle class="node" style="animation-delay:-1.3s" cx="480" cy="260" r="9"/></g>
+</svg>
+<div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:6px">
+<span class="mono" style="font-size:12px;padding:7px 12px;border-radius:8px;border:1px solid rgba(255,197,61,.6);color:#FFE08A">01 AS FETCHLY · LIVE</span>
+<span class="mono" style="font-size:12px;padding:7px 12px;border-radius:8px;border:1px solid rgba(255,138,61,.6);color:#FFB27D">02 SENTINELAI · IN THE FORGE</span>
+<span class="mono" style="font-size:12px;padding:7px 12px;border-radius:8px;border:1px solid rgba(160,200,255,.4);color:#A9BBDD">03 SECURITY RESEARCH</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="lab" style="position:relative;z-index:2;padding:150px clamp(20px,5vw,72px);max-width:1280px;margin:0 auto;width:100%;box-sizing:border-box">
+<div class="amb" style="background:radial-gradient(800px 420px at 30% 40%,rgba(25,232,255,.24),transparent 70%),radial-gradient(700px 380px at 85% 65%,rgba(255,106,31,.2),transparent 70%)"></div>
+<div style="position:relative">
+<div class="mono" style="font-size:13px;letter-spacing:.12em;color:#19E8FF;margin-bottom:16px">// THE LAB · OUR PROJECTS</div>
+<h2 class="hd" style="margin:0 0 20px;font-weight:700;font-size:clamp(32px,4.8vw,60px);line-height:1.06;text-wrap:balance">Real products. Real research. In progress.</h2>
+<p style="margin:0 0 64px;max-width:640px;font-size:18px;line-height:1.7;color:#C5D2EC">Every project here is being built right now, with a clear plan. Some are live, some are in development, and more are coming.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:32px">
+<div class="panel fu1" style="min-width:0;border-radius:22px;border:1px solid rgba(255,197,61,.55);background:rgba(34,20,8,.9);padding:38px 34px;box-sizing:border-box;box-shadow:0 0 60px rgba(255,138,31,.12)">
+<div class="sw" style="position:absolute;top:0;left:0;width:36%;height:2px;background:linear-gradient(90deg,transparent,#FFC53D,transparent)"></div>
+<span class="mono" style="display:inline-block;font-size:11.5px;letter-spacing:.1em;padding:6px 11px;border-radius:7px;border:1px solid #FFC53D;color:#FFE08A;margin-bottom:20px">● LIVE NOW</span>
+<h3 class="hd" style="margin:0 0 6px;font-weight:700;font-size:30px">AS Fetchly</h3>
+<div class="mono" style="font-size:12px;color:#FFB27D;margin-bottom:14px">PRODUCT · DESKTOP APP</div>
+<p style="margin:0 0 24px;font-size:16px;line-height:1.7;color:#C5D2EC">Download YouTube and TikTok videos, playlists and whole profiles up to 4K, with auto-download and cutting.</p>
+<div style="height:8px;border-radius:8px;background:rgba(255,255,255,.1);overflow:hidden"><div style="width:100%;height:100%;background:linear-gradient(90deg,#FFC53D,#FF5A1F)"></div></div>
+<div class="mono" style="margin-top:10px;font-size:12px;color:#FFE08A">v0.8.0 · AVAILABLE TO DOWNLOAD</div>
+</div>
+<div class="panel fu2" style="min-width:0;border-radius:22px;border:1px solid rgba(25,232,255,.55);background:rgba(5,14,32,.92);padding:38px 34px;box-sizing:border-box;box-shadow:0 0 60px rgba(25,232,255,.12)">
+<div class="sw" style="position:absolute;top:0;left:0;width:36%;height:2px;background:linear-gradient(90deg,transparent,#19E8FF,transparent);animation-delay:.6s"></div>
+<span class="mono" style="display:inline-block;font-size:11.5px;letter-spacing:.1em;padding:6px 11px;border-radius:7px;border:1px solid #19E8FF;color:#7DEBFF;margin-bottom:20px">◐ IN DEVELOPMENT</span>
+<h3 class="hd" style="margin:0 0 6px;font-weight:700;font-size:30px">SentinelAI</h3>
+<div class="mono" style="font-size:12px;color:#7DEBFF;margin-bottom:14px">RESEARCH · AI SECURITY</div>
+<p style="margin:0 0 24px;font-size:16px;line-height:1.7;color:#C5D2EC">An adaptive red-teaming model with self-improving guardrails, built to protect an IT support assistant from attacks.</p>
+<div style="height:8px;border-radius:8px;background:rgba(255,255,255,.1);overflow:hidden"><div style="width:35%;height:100%;background:linear-gradient(90deg,#19E8FF,#7B61FF)"></div></div>
+<div class="mono" style="margin-top:10px;font-size:12px;color:#7DEBFF">PROPOSAL STAGE · BUILDING NOW</div>
+</div>
+<div class="panel fu3" style="min-width:0;border-radius:22px;border:1px solid rgba(255,61,203,.55);background:rgba(26,8,28,.92);padding:38px 34px;box-sizing:border-box;box-shadow:0 0 60px rgba(255,61,203,.12)">
+<div class="sw" style="position:absolute;top:0;left:0;width:36%;height:2px;background:linear-gradient(90deg,transparent,#FF3DCB,transparent);animation-delay:1.2s"></div>
+<span class="mono" style="display:inline-block;font-size:11.5px;letter-spacing:.1em;padding:6px 11px;border-radius:7px;border:1px solid #FF3DCB;color:#FF9BE4;margin-bottom:20px">○ COMING NEXT</span>
+<h3 class="hd" style="margin:0 0 6px;font-weight:700;font-size:30px">Security Toolkit</h3>
+<div class="mono" style="font-size:12px;color:#FF9BE4;margin-bottom:14px">PROJECT · CYBERSECURITY</div>
+<p style="margin:0 0 24px;font-size:16px;line-height:1.7;color:#C5D2EC">A practical security tool from our cybersecurity work. Name and details will be announced soon.</p>
+<div style="height:8px;border-radius:8px;background:rgba(255,255,255,.1);overflow:hidden"><div style="width:8%;height:100%;background:linear-gradient(90deg,#FF3DCB,#FF8A3D)"></div></div>
+<div class="mono" style="margin-top:10px;font-size:12px;color:#FF9BE4">PLANNING</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="mech" style="position:relative;z-index:2;padding:150px clamp(20px,5vw,72px);max-width:1280px;margin:0 auto;width:100%;box-sizing:border-box">
+<div class="amb" style="background:radial-gradient(800px 420px at 70% 45%,rgba(123,97,255,.34),transparent 70%),radial-gradient(600px 340px at 15% 60%,rgba(255,61,203,.18),transparent 70%)"></div>
+<div style="position:relative;display:flex;flex-wrap:wrap;gap:60px;align-items:center">
+<div class="fl" style="flex:1 1 400px;min-width:0">
+<div class="mono" style="font-size:13px;letter-spacing:.12em;color:#BDB0FF;margin-bottom:16px">// HOW IT WORKS</div>
+<h2 class="hd" style="margin:0 0 18px;font-weight:700;font-size:clamp(32px,4.6vw,56px);line-height:1.06">A precision machine in five moves.</h2>
+<p style="margin:0 0 30px;font-size:18px;line-height:1.7;color:#C5D2EC">Every step turns the next, like gears in a mechanism. You only start the first one.</p>
+<div style="display:flex;flex-direction:column;gap:12px">
+<div class="panel" style="display:flex;align-items:center;gap:16px;padding:16px 18px;border-radius:14px;border:1px solid rgba(0,229,255,.4);background:rgba(0,229,255,.05)"><span class="mono" style="color:#7DEBFF;width:28px">01</span><span style="font-weight:600;width:110px">Paste link</span><span style="font-size:14px;color:#A9BBDD">video, playlist or profile</span></div>
+<div class="panel" style="display:flex;align-items:center;gap:16px;padding:16px 18px;border-radius:14px;border:1px solid rgba(123,97,255,.5);background:rgba(123,97,255,.06)"><span class="mono" style="color:#BDB0FF;width:28px">02</span><span style="font-weight:600;width:110px">Resolve</span><span style="font-size:14px;color:#A9BBDD">newest, popular or oldest</span></div>
+<div class="panel" style="display:flex;align-items:center;gap:16px;padding:16px 18px;border-radius:14px;border:1px solid rgba(255,61,203,.5);background:rgba(255,61,203,.06)"><span class="mono" style="color:#FF9BE4;width:28px">03</span><span style="font-weight:600;width:110px">Download</span><span style="font-size:14px;color:#A9BBDD">up to 8 at once</span></div>
+<div class="panel" style="display:flex;align-items:center;gap:16px;padding:16px 18px;border-radius:14px;border:1px solid rgba(255,138,61,.5);background:rgba(255,138,61,.06)"><span class="mono" style="color:#FFB27D;width:28px">04</span><span style="font-weight:600;width:110px">Cut</span><span style="font-size:14px;color:#A9BBDD">parts or short clips</span></div>
+<div class="panel" style="display:flex;align-items:center;gap:16px;padding:16px 18px;border-radius:14px;border:1px solid rgba(255,197,61,.5);background:rgba(255,197,61,.06)"><span class="mono" style="color:#FFE08A;width:28px">05</span><span style="font-weight:600;width:110px">Save</span><span style="font-size:14px;color:#A9BBDD">named by video title</span></div>
+</div>
+</div>
+<div class="fr" style="flex:1 1 440px;min-width:0">
+<div style="perspective:1400px">
+<div style="transform:rotateY(-14deg) rotateX(8deg);border-radius:26px;border:1px solid rgba(123,97,255,.4);background:rgba(8,10,30,.84);padding:30px;box-shadow:0 50px 100px rgba(0,0,0,.55),0 0 90px rgba(123,97,255,.22)">
+<svg viewBox="0 0 420 250" style="display:block;width:100%;height:auto" aria-hidden="true">
+<g transform="translate(95 105)"><g class="spin3" style="transform-origin:0 0;animation-duration:20s"><path d="M58.0 0.0 L69.8 5.6 L68.2 15.6 L55.3 17.4 L52.3 25.2 L60.4 35.4 L54.7 43.6 L42.3 39.7 L36.2 45.3 L39.1 58.1 L30.4 63.1 L20.9 54.1 L12.9 56.5 L10.0 69.3 L0.0 70.0 L-4.7 57.8 L-12.9 56.5 L-21.0 66.8 L-30.4 63.1 L-29.3 50.1 L-36.2 45.3 L-47.9 51.0 L-54.7 43.6 L-48.1 32.4 L-52.3 25.2 L-65.3 25.2 L-68.2 15.6 L-57.4 8.3 L-58.0 0.0 L-69.8 -5.6 L-68.2 -15.6 L-55.3 -17.4 L-52.3 -25.2 L-60.4 -35.4 L-54.7 -43.6 L-42.3 -39.7 L-36.2 -45.3 L-39.1 -58.1 L-30.4 -63.1 L-20.9 -54.1 L-12.9 -56.5 L-10.0 -69.3 L-0.0 -70.0 L4.7 -57.8 L12.9 -56.5 L21.0 -66.8 L30.4 -63.1 L29.3 -50.1 L36.2 -45.3 L47.9 -51.0 L54.7 -43.6 L48.1 -32.4 L52.3 -25.2 L65.3 -25.2 L68.2 -15.6 L57.4 -8.3Z" fill="rgba(0,229,255,.14)" stroke="#00E5FF" stroke-width="2.5"/><circle r="16" fill="#02030A" stroke="#00E5FF" stroke-width="2.5"/></g></g>
+<g transform="translate(210 105)"><g class="spin2" style="transform-origin:0 0;animation-duration:13s"><path d="M34.0 0.0 L44.6 5.6 L42.3 15.4 L30.2 15.5 L26.0 21.9 L30.6 33.0 L22.5 39.0 L13.2 31.3 L5.9 33.5 L2.2 44.9 L-7.8 44.3 L-10.1 32.5 L-17.0 29.4 L-27.2 35.8 L-34.5 28.9 L-28.6 18.4 L-31.9 11.6 L-43.9 10.0 L-45.0 0.0 L-33.7 -4.3 L-31.9 -11.6 L-40.0 -20.6 L-34.5 -28.9 L-23.1 -24.9 L-17.0 -29.4 L-17.4 -41.5 L-7.8 -44.3 L-1.7 -34.0 L5.9 -33.5 L13.3 -43.0 L22.5 -39.0 L20.6 -27.1 L26.0 -21.9 L37.8 -24.4 L42.3 -15.4 L33.2 -7.5Z" fill="rgba(255,61,203,.14)" stroke="#FF3DCB" stroke-width="2.5"/><circle r="12" fill="#02030A" stroke="#FF3DCB" stroke-width="2.5"/></g></g>
+<g transform="translate(315 105)"><g class="spin3" style="transform-origin:0 0;animation-duration:23s"><path d="M48.0 0.0 L59.7 5.6 L58.0 15.5 L45.0 16.7 L41.6 24.0 L48.9 34.8 L42.4 42.4 L30.6 37.0 L24.0 41.6 L25.0 54.6 L15.5 58.0 L8.0 47.3 L0.0 48.0 L-5.6 59.7 L-15.5 58.0 L-16.7 45.0 L-24.0 41.6 L-34.8 48.9 L-42.4 42.4 L-37.0 30.6 L-41.6 24.0 L-54.6 25.0 L-58.0 15.5 L-47.3 8.0 L-48.0 0.0 L-59.7 -5.6 L-58.0 -15.5 L-45.0 -16.7 L-41.6 -24.0 L-48.9 -34.8 L-42.4 -42.4 L-30.6 -37.0 L-24.0 -41.6 L-25.0 -54.6 L-15.5 -58.0 L-8.0 -47.3 L-0.0 -48.0 L5.6 -59.7 L15.5 -58.0 L16.7 -45.0 L24.0 -41.6 L34.8 -48.9 L42.4 -42.4 L37.0 -30.6 L41.6 -24.0 L54.6 -25.0 L58.0 -15.5 L47.3 -8.0Z" fill="rgba(255,197,61,.14)" stroke="#FFC53D" stroke-width="2.5"/><circle r="14" fill="#02030A" stroke="#FFC53D" stroke-width="2.5"/></g></g>
+<path d="M30 218H390" stroke="rgba(255,255,255,.14)" stroke-width="2"/><path class="flow" d="M30 218H390" stroke="#7B61FF" stroke-width="3" fill="none"/>
+<circle r="6" fill="#fff"><animateMotion dur="3.6s" repeatCount="indefinite" path="M30 218H390"/></circle>
+</svg>
+<div class="mono" style="font-size:12px;letter-spacing:.1em;color:#BDB0FF;margin-top:8px">DRIVE TRAIN · EVERY STEP TURNS THE NEXT</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="specs" style="position:relative;z-index:2;padding:150px clamp(20px,5vw,72px);max-width:1280px;margin:0 auto;width:100%;box-sizing:border-box">
+<div class="amb" style="background:radial-gradient(800px 400px at 20% 40%,rgba(0,229,255,.24),transparent 70%),radial-gradient(700px 380px at 85% 70%,rgba(255,197,61,.14),transparent 70%)"></div>
+<div style="position:relative">
+<div class="mono" style="font-size:13px;letter-spacing:.12em;color:#00E5FF;margin-bottom:16px">// FEATURES</div>
+<h2 class="hd" style="margin:0 0 64px;font-weight:700;font-size:clamp(32px,4.8vw,60px);line-height:1.06">Everything AS Fetchly can do.</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:32px">
+<div class="panel fu1" style="min-width:0;border-radius:20px;border:1px solid rgba(0,229,255,.4);background:rgba(7,14,30,.9);padding:38px 34px;box-sizing:border-box"><div class="sw" style="position:absolute;top:0;left:0;width:36%;height:2px;background:linear-gradient(90deg,transparent,#00E5FF,transparent)"></div><div class="mono" style="font-size:12px;color:#00E5FF;margin-bottom:18px">01 · BULK</div><h3 class="hd" style="margin:0 0 12px;font-weight:600;font-size:26px">Playlists and profiles</h3><p style="margin:0;font-size:16px;line-height:1.7;color:#A9BBDD">Paste one link and pull a whole playlist or channel. Choose newest, most popular or oldest first.</p></div>
+<div class="panel fu2" style="min-width:0;border-radius:20px;border:1px solid rgba(123,97,255,.5);background:rgba(10,10,32,.9);padding:38px 34px;box-sizing:border-box"><div class="sw" style="position:absolute;top:0;left:0;width:36%;height:2px;background:linear-gradient(90deg,transparent,#7B61FF,transparent);animation-delay:.5s"></div><div class="mono" style="font-size:12px;color:#BDB0FF;margin-bottom:18px">02 · AUTO</div><h3 class="hd" style="margin:0 0 12px;font-weight:600;font-size:26px">Daily auto-download</h3><p style="margin:0;font-size:16px;line-height:1.7;color:#A9BBDD">Save accounts once. New videos arrive in their own numbered folders at the time you pick.</p></div>
+<div class="panel fu3" style="min-width:0;border-radius:20px;border:1px solid rgba(255,61,203,.5);background:rgba(24,8,26,.9);padding:38px 34px;box-sizing:border-box"><div class="sw" style="position:absolute;top:0;left:0;width:36%;height:2px;background:linear-gradient(90deg,transparent,#FF3DCB,transparent);animation-delay:1s"></div><div class="mono" style="font-size:12px;color:#FF9BE4;margin-bottom:18px">03 · CUT</div><h3 class="hd" style="margin:0 0 12px;font-weight:600;font-size:26px">Smart video cutting</h3><p style="margin:0;font-size:16px;line-height:1.7;color:#A9BBDD">Split into equal parts or clips of any length, and keep the original if you want.</p></div>
+<div class="panel fu1" style="min-width:0;border-radius:20px;border:1px solid rgba(255,138,61,.5);background:rgba(26,14,8,.9);padding:38px 34px;box-sizing:border-box"><div class="sw" style="position:absolute;top:0;left:0;width:36%;height:2px;background:linear-gradient(90deg,transparent,#FF8A3D,transparent);animation-delay:1.5s"></div><div class="mono" style="font-size:12px;color:#FFB27D;margin-bottom:18px">04 · SPEED</div><h3 class="hd" style="margin:0 0 12px;font-weight:600;font-size:26px">Eight at a time</h3><p style="margin:0;font-size:16px;line-height:1.7;color:#A9BBDD">Parallel downloads with smart limits, so everything finishes fast and nothing breaks.</p></div>
+<div class="panel fu2" style="min-width:0;border-radius:20px;border:1px solid rgba(255,197,61,.5);background:rgba(30,18,8,.9);padding:38px 34px;box-sizing:border-box"><div class="sw" style="position:absolute;top:0;left:0;width:36%;height:2px;background:linear-gradient(90deg,transparent,#FFC53D,transparent);animation-delay:2s"></div><div class="mono" style="font-size:12px;color:#FFE08A;margin-bottom:18px">05 · QUALITY</div><h3 class="hd" style="margin:0 0 12px;font-weight:600;font-size:26px">144p to 4K</h3><p style="margin:0;font-size:16px;line-height:1.7;color:#A9BBDD">MP4, MKV, WebM, MP3 or M4A, saved under the video's own title.</p></div>
+<div class="panel fu3" style="min-width:0;border-radius:20px;border:1px solid rgba(45,182,255,.5);background:rgba(8,16,30,.9);padding:38px 34px;box-sizing:border-box"><div class="sw" style="position:absolute;top:0;left:0;width:36%;height:2px;background:linear-gradient(90deg,transparent,#2DB6FF,transparent);animation-delay:2.5s"></div><div class="mono" style="font-size:12px;color:#7DD8FF;margin-bottom:18px">06 · EASY</div><h3 class="hd" style="margin:0 0 12px;font-weight:600;font-size:26px">English and Urdu</h3><p style="margin:0;font-size:16px;line-height:1.7;color:#A9BBDD">One click switches the whole app. It updates its download engine by itself, quietly.</p></div>
+</div>
+</div>
+</section>
+
+<section id="live" style="position:relative;z-index:2;padding:150px clamp(20px,5vw,72px);max-width:1280px;margin:0 auto;width:100%;box-sizing:border-box">
+<div class="amb" style="background:radial-gradient(700px 400px at 70% 50%,rgba(255,61,203,.28),transparent 70%),radial-gradient(600px 340px at 20% 60%,rgba(0,229,255,.16),transparent 70%)"></div>
+<div style="position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:56px">
+<div class="fl" style="flex:1 1 340px;min-width:0">
+<div class="mono" style="font-size:13px;letter-spacing:.12em;color:#FF3DCB;margin-bottom:16px">// LIVE VIEW</div>
+<h2 class="hd" style="margin:0 0 18px;font-weight:700;font-size:clamp(32px,4.6vw,56px);line-height:1.06">See every layer at work.</h2>
+<p style="margin:0 0 28px;font-size:18px;line-height:1.7;color:#A9BBDD">Queue, activity log and saved output, all updating in real time. Nothing hidden, nothing guessed.</p>
+<div class="mono" style="display:flex;flex-direction:column;gap:14px;font-size:14px">
+<span style="display:flex;align-items:center;gap:12px"><i style="width:12px;height:12px;border-radius:3px;background:#FF3DCB;display:inline-block"></i>Queue: what is downloading now</span>
+<span style="display:flex;align-items:center;gap:12px"><i style="width:12px;height:12px;border-radius:3px;background:#00E5FF;display:inline-block"></i>Log: every step as it happens</span>
+<span style="display:flex;align-items:center;gap:12px"><i style="width:12px;height:12px;border-radius:3px;background:#FFC53D;display:inline-block"></i>Output: your folders, named by title</span>
+</div>
+</div>
+<div class="fr stage" style="flex:1.2 1 440px;min-width:0">
+<div class="rig">
+<div class="plate" style="inset:0;transform:translateZ(0);border:1.5px solid rgba(255,197,61,.7);background-color:rgba(255,197,61,.05);background-image:linear-gradient(rgba(255,197,61,.18) 1px,transparent 1px),linear-gradient(90deg,rgba(255,197,61,.18) 1px,transparent 1px);background-size:34px 34px;box-shadow:0 0 70px rgba(255,197,61,.28)">
+<span class="mono" style="position:absolute;left:14px;bottom:10px;font-size:12px;letter-spacing:.1em;color:#FFE08A">OUTPUT · FOLDERS</span>
+<span class="mono" style="position:absolute;right:14px;bottom:10px;font-size:12px;color:#FFE08A">✓ SAVED</span>
+</div>
+<div class="plate" style="inset:0;transform:translateZ(90px);border:1.5px solid rgba(0,229,255,.8);background:rgba(5,10,26,.88);box-shadow:0 0 60px rgba(0,229,255,.3);overflow:hidden">
+<div style="display:flex;align-items:center;gap:7px;padding:10px 14px;border-bottom:1px solid rgba(0,229,255,.3)"><i style="width:9px;height:9px;border-radius:50%;background:#FF5F57;display:inline-block"></i><i style="width:9px;height:9px;border-radius:50%;background:#FEBC2E;display:inline-block"></i><i style="width:9px;height:9px;border-radius:50%;background:#28C840;display:inline-block"></i><span class="mono" style="margin-left:8px;font-size:11.5px;color:#7DEBFF">LOG · LIVE</span></div>
+<div style="height:260px;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,transparent,#000 14%,#000 86%,transparent);mask-image:linear-gradient(to bottom,transparent,#000 14%,#000 86%,transparent)">
+<div class="logs mono" style="padding:8px 16px;font-size:13px;line-height:2.1;white-space:nowrap;color:#B9C8E6">
+<div><span style="color:#6F82A8">09:00:01</span> <span style="color:#FFE08A">✓</span> Daily run started · 3 accounts</div>
+<div><span style="color:#6F82A8">09:00:03</span> <span style="color:#7DEBFF">›</span> Playlist resolved · 24 videos</div>
+<div><span style="color:#6F82A8">09:00:06</span> <span style="color:#7DEBFF">›</span> Quality 1080p · MP4</div>
+<div><span style="color:#6F82A8">09:00:09</span> <span style="color:#FFE08A">✓</span> Saved · Video title one.mp4</div>
+<div><span style="color:#6F82A8">09:00:14</span> <span style="color:#FFB27D">✂</span> Cutting into 4 parts</div>
+<div><span style="color:#6F82A8">09:00:19</span> <span style="color:#FFE08A">✓</span> Saved · Video title two.mp4</div>
+<div><span style="color:#6F82A8">09:00:24</span> <span style="color:#FF9BE4">♪</span> Audio extracted · MP3</div>
+<div><span style="color:#6F82A8">09:00:01</span> <span style="color:#FFE08A">✓</span> Daily run started · 3 accounts</div>
+<div><span style="color:#6F82A8">09:00:03</span> <span style="color:#7DEBFF">›</span> Playlist resolved · 24 videos</div>
+<div><span style="color:#6F82A8">09:00:06</span> <span style="color:#7DEBFF">›</span> Quality 1080p · MP4</div>
+<div><span style="color:#6F82A8">09:00:09</span> <span style="color:#FFE08A">✓</span> Saved · Video title one.mp4</div>
+<div><span style="color:#6F82A8">09:00:14</span> <span style="color:#FFB27D">✂</span> Cutting into 4 parts</div>
+<div><span style="color:#6F82A8">09:00:19</span> <span style="color:#FFE08A">✓</span> Saved · Video title two.mp4</div>
+<div><span style="color:#6F82A8">09:00:24</span> <span style="color:#FF9BE4">♪</span> Audio extracted · MP3</div>
+</div>
+</div>
+</div>
+<div class="plate hv2" style="left:6%;right:42%;top:-26px;height:92px;border:1.5px solid rgba(255,61,203,.85);background:rgba(36,8,34,.9);box-shadow:0 0 50px rgba(255,61,203,.4);padding:12px 14px">
+<div class="mono" style="font-size:11px;letter-spacing:.1em;color:#FF9BE4;margin-bottom:10px">QUEUE · 1080p MP4</div>
+<div style="height:8px;border-radius:8px;background:rgba(255,255,255,.12);overflow:hidden"><div style="width:72%;height:100%;border-radius:8px;background:linear-gradient(90deg,#FF3DCB,#FF8A3D)"></div></div>
+<div style="height:8px;border-radius:8px;background:rgba(255,255,255,.12);overflow:hidden;margin-top:9px"><div style="width:41%;height:100%;border-radius:8px;background:linear-gradient(90deg,#7B61FF,#FF3DCB)"></div></div>
+</div>
+<div class="plate hv1 mono" style="right:-10px;bottom:36px;width:150px;height:44px;border:1.5px solid rgba(255,197,61,.9);background:rgba(34,20,8,.92);box-shadow:0 0 40px rgba(255,197,61,.45);display:flex;align-items:center;justify-content:center;font-size:13px;color:#FFE08A">✓ 24 / 24 saved</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="plans" style="position:relative;z-index:2;padding:150px clamp(20px,5vw,72px);max-width:1280px;margin:0 auto;width:100%;box-sizing:border-box">
+<div class="amb" style="background:radial-gradient(700px 380px at 75% 50%,rgba(255,197,61,.2),transparent 70%),radial-gradient(600px 320px at 15% 50%,rgba(123,97,255,.24),transparent 70%)"></div>
+<div style="position:relative">
+<div class="mono" style="font-size:13px;letter-spacing:.12em;color:#FFC53D;margin-bottom:16px">// PLANS</div>
+<h2 class="hd" style="margin:0 0 64px;font-weight:700;font-size:clamp(32px,4.8vw,60px);line-height:1.06">Start free. Unlock everything with Pro.</h2>
+<div style="display:flex;flex-wrap:wrap;gap:36px">
+<div class="panel fl" style="flex:1 1 320px;min-width:0;border-radius:26px;border:1px solid rgba(120,180,255,.3);background:rgba(7,12,28,.9);padding:44px;box-sizing:border-box">
+<div class="mono" style="font-size:13px;color:#93A4C7;letter-spacing:.1em">FREE</div>
+<div class="hd" style="font-weight:700;font-size:36px;margin:10px 0 26px">Try it today</div>
+<ul style="margin:0 0 30px;padding:0;list-style:none;display:flex;flex-direction:column;gap:16px;font-size:17px;color:#D6E3FF"><li>✓ Single video downloads</li><li>✓ Up to 720p</li><li>✓ Saved under the video title</li></ul>
+<a class="ghost" href="#download" style="display:inline-block;border:1.5px solid rgba(160,200,255,.5);color:#E6F0FF;font-weight:600;padding:13px 26px;border-radius:12px">Download free</a>
+</div>
+<div class="fr" style="flex:1 1 320px;min-width:0;position:relative;overflow:hidden;border-radius:28px;padding:2px;box-sizing:border-box">
+<div class="spin" style="position:absolute;left:-60%;top:-60%;width:220%;height:220%;background:conic-gradient(from 0deg,#00E5FF,#7B61FF,#FF3DCB,#FF8A3D,#FFC53D,#00E5FF)"></div>
+<div style="position:relative;border-radius:26px;background:#080D20;padding:44px;box-sizing:border-box;height:100%">
+<div class="mono" style="font-size:13px;color:#7DEBFF;letter-spacing:.1em">PRO</div>
+<div class="hd" style="font-weight:700;font-size:36px;margin:10px 0 26px">Everything unlocked</div>
+<ul style="margin:0 0 30px;padding:0;list-style:none;display:flex;flex-direction:column;gap:16px;font-size:17px;color:#E6F0FF"><li>✓ Playlists and whole profiles</li><li>✓ Saved accounts with daily downloads</li><li>✓ Video cutting</li><li>✓ Quality up to 4K</li></ul>
+<a class="b3d" href="https://wa.me/923211478590" style="background:linear-gradient(135deg,#00E5FF,#7B61FF);--sh:#2a2a94;color:#04060F;font-weight:700;padding:14px 28px;border-radius:12px">Get Pro on WhatsApp</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section style="position:relative;z-index:2;padding:110px clamp(20px,5vw,72px) 150px;max-width:1280px;margin:0 auto;width:100%;box-sizing:border-box">
+<div class="in3d" style="position:relative;overflow:hidden;border-radius:32px;border:1px solid rgba(120,180,255,.3);background:#04071A;padding:clamp(70px,10vw,150px) 24px;text-align:center">
+<div class="tun"></div><div class="tun" style="animation-delay:-1.75s;border-color:rgba(123,97,255,.6)"></div><div class="tun" style="animation-delay:-3.5s;border-color:rgba(255,61,203,.55)"></div><div class="tun" style="animation-delay:-5.25s;border-color:rgba(255,197,61,.5)"></div>
+<div style="position:absolute;inset:0;background:radial-gradient(520px 260px at 50% 50%,#04071A 50%,transparent);pointer-events:none"></div>
+<div style="position:relative">
+<h2 class="hd" style="margin:0 0 18px;font-weight:700;font-size:clamp(34px,5.6vw,76px);line-height:1.04;text-wrap:balance">Ready to <span class="g" style="background-image:linear-gradient(90deg,#00E5FF,#7B61FF,#FF3DCB,#FF8A3D,#00E5FF);-webkit-background-clip:text;background-clip:text;color:transparent">fetch</span>?</h2>
+<p style="margin:0 auto 40px;max-width:460px;font-size:19px;line-height:1.6;color:#C6D4F0">Download AS Fetchly and start in minutes.</p>
+<a class="b3d" href="#download" style="background:linear-gradient(135deg,#FFC53D,#FF5A1F);--sh:#9a3a0a;color:#04120A;font-weight:700;font-size:18px;padding:18px 40px;border-radius:14px">Download for Windows</a>
+</div>
+</div>
+</section>
+
+<footer id="contact" style="position:relative;z-index:2;margin-top:auto;border-top:1px solid rgba(120,180,255,.16);padding:32px clamp(20px,5vw,72px);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:14px;color:#93A4C7;box-sizing:border-box">
+<span>© AS Forge. All rights reserved.</span>
+<span>Download only content you own or have permission to save.</span>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":8500}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+[
+  {
+    "slug": "welcome-to-as-forge",
+    "title": "Welcome to AS Forge",
+    "date": "2026-11-18",
+    "tag": "Company",
+    "summary": "AS Forge is open. Here is who we are, what we are building and what comes next.",
+    "body": "<p>AS Forge is a software company building fast, secure tools. We start small and careful: one product at a time, each built to the same standard.</p><p>Our first product, <a href=\"/fetchly\">AS Fetchly</a>, is live. Next to it we are working on <b>SentinelAI</b>, a research project on adaptive red teaming and self-improving guardrails for AI assistants, and a cybersecurity toolkit that will be announced soon.</p><p>Follow the progress on the <a href=\"/projects\">Projects</a> page, and write to us on the <a href=\"/contact\">Contact</a> page if you have an idea or a question.</p>"
+  },
+  {
+    "slug": "as-fetchly-0-8-0",
+    "title": "AS Fetchly 0.8.0: one file to install, one click to remove",
+    "date": "2026-11-18",
+    "tag": "Release",
+    "summary": "A single setup file that replaces old versions automatically, plus an Uninstall button inside the app.",
+    "body": "<p>AS Fetchly 0.8.0 ships as one setup file. Run it and the app installs itself and opens. If an older version is already installed, it is replaced automatically.</p><ul><li>Uninstall from Windows Settings, or with the new Uninstall button inside the app.</li><li>Your settings stay in your user folder unless you delete them.</li><li>English and Urdu interface.</li></ul><p>Get it on the <a href=\"/fetchly#download\">download section</a>. If Windows shows a \"protected your PC\" screen, click More info, then Run anyway.</p>"
+  }
+]
